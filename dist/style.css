@@ -3,3 +3,9 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+#content {
+    color: azure;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-size: 25px;
+}

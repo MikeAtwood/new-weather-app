@@ -20,5 +20,8 @@
   "homepage": "https://github.com/MikeAtwood/new-weather-app#readme",
   "devDependencies": {
     "webpack-cli": "^5.0.2"
+  },
+  "dependencies": {
+    "moment": "^2.29.4"
   }
 }

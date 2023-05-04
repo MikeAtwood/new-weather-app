@@ -1,0 +1,1 @@
+console.log("Before fetchWeatherData"),async function(){try{const o=await fetch("https://api.weather.gov/gridpoints/LWX/45,94/forecast"),e=await o.json();console.log(e.properties.periods[1].shortForecast)}catch(o){console.error(o)}}(),console.log("After fetchWeatherData");

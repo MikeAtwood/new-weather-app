@@ -2,11 +2,11 @@ import moment from 'moment'
 
 const API_KEY = "37c5032acb2b4e67a9f215631230205"
 let DEFAULT_CITY = "Minnetonka"
-let API_URL = `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${DEFAULT_CITY}`
+let API_URL = `https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${DEFAULT_CITY}`
 
 async function fetchWeatherData(city) {
     try {
-        const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${city}`)
+        const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${city}`)
         const data = await response.json()
         console.log(data)
         return data;
@@ -98,8 +98,26 @@ const displayMoreInfo = () => {
         feelsLikeTemp.textContent = `${Math.round(data.current.feelslike_f)} ºF`
         feelsLikeTemp.classList.add('feels-temp')
 
+        const humidityText = document.createElement('h3')
+        humidityText.textContent = 'Humidity'
+
+        const humidityPercent = document.createElement('h2')
+        humidityPercent.textContent = `${data.current.humidity} %`
+        humidityPercent.classList.add('humidity-per')
+
+        const chanceRainText = document.createElement('h3')
+        chanceRainText.textContent = 'Chance of Rain'
+
+        const chanceRainPer = document.createElement('h2')
+        chanceRainPer.textContent = `${data.forecast.forecastday[0].day.daily_chance_of_rain} %`
+        chanceRainPer.classList.add('rain-per')
+
         content2.appendChild(feelsLikeText)
         content2.appendChild(feelsLikeTemp)
+        content2.appendChild(humidityText)
+        content2.appendChild(humidityPercent)
+        content2.appendChild(chanceRainText)
+        content2.appendChild(chanceRainPer)
     })
 }
 displayMoreInfo()

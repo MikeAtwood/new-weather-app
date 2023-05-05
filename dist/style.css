@@ -66,8 +66,8 @@ body::before {
   }
 
   img {
-    width: 150px;
-    height: 150px;
+    width: 120px;
+    height: 120px;
   }
 
 .condition {
@@ -101,6 +101,14 @@ body::before {
 }
 
 .feels-temp {
+    margin-left: 25px;
+}
+
+.humidity-per {
+    margin-left: 25px;
+}
+
+.rain-per {
     margin-left: 25px;
 }
 

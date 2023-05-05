@@ -8,6 +8,7 @@ body {
     background-size: cover;
     background-position: center;
     overflow: hidden;
+    margin: 45px;
 }
 body::before {
     content: "";
@@ -63,3 +64,29 @@ body::before {
     font-size: 16px;
     margin-right: 5px;
   }
+
+  img {
+    width: 150px;
+    height: 150px;
+  }
+
+.condition {
+    font-weight: lighter;
+    font-size: 40px;
+  }
+
+.city {
+    font-size: 20px;
+    font-weight: lighter;
+}
+
+.date {
+    font-size: 20px;
+    font-weight: lighter;
+}
+
+#content > * {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 0;
+}

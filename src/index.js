@@ -26,17 +26,26 @@ const getCurrentDateTime = () => {
 const displayMainWeather = (city) => {
     fetchWeatherData(city).then(data => {
         const content = document.getElementById('content')
+        const condition = document.createElement('h1')
         const cityName = document.createElement('h2')
         const currentDate = document.createElement('p')
         const temperature = document.createElement('h1')
+        const weatherImg = document.createElement('img')
+        weatherImg.src = `${data.current.condition.icon}`
+        condition.textContent = `${data.current.condition.text}`
         cityName.textContent = city
         currentDate.textContent = getCurrentDateTime()
         temperature.textContent = `${data.current.temp_f}ºF`
+        condition.classList.add('condition')
+        cityName.classList.add('city')
+        currentDate.classList.add('date')
 
         content.textContent = ''
+        content.appendChild(condition)
         content.appendChild(cityName)
         content.appendChild(currentDate)
         content.appendChild(temperature)
+        content.appendChild(weatherImg)
     })
 }  
 

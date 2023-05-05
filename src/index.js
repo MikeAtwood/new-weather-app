@@ -35,7 +35,7 @@ const displayMainWeather = (city) => {
         condition.textContent = `${data.current.condition.text}`
         cityName.textContent = city
         currentDate.textContent = getCurrentDateTime()
-        temperature.textContent = `${data.current.temp_f}ºF`
+        temperature.textContent = `${Math.round(data.current.temp_f)}ºF`
         condition.classList.add('condition')
         cityName.classList.add('city')
         currentDate.classList.add('date')
@@ -83,3 +83,22 @@ document.body.appendChild(locationForm);
 locationForm.addEventListener('submit', handleLocationFormSubmit);
 
 displayMainWeather(DEFAULT_CITY);
+
+// Fetch extra current info
+const displayMoreInfo = () => {
+    fetchWeatherData(API_URL).then(data => {
+        console.log(data.current.feelslike_f)
+
+        const content2 = document.getElementById('content2')
+
+        const feelsLikeText = document.createElement('h3')
+        feelsLikeText.textContent = 'Feels Like'
+
+        const feelsLikeTemp = document.createElement('h2')
+        feelsLikeTemp.textContent = `${data.current.feelslike_f}`
+
+        content2.appendChild(feelsLikeText)
+        content2.appendChild(feelsLikeTemp)
+    })
+}
+displayMoreInfo()

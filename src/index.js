@@ -35,7 +35,7 @@ const displayMainWeather = (city) => {
         condition.textContent = `${data.current.condition.text}`
         cityName.textContent = city
         currentDate.textContent = getCurrentDateTime()
-        temperature.textContent = `${Math.round(data.current.temp_f)}ºF`
+        temperature.textContent = `${Math.round(data.current.temp_f)} ºF`
         condition.classList.add('condition')
         cityName.classList.add('city')
         currentDate.classList.add('date')
@@ -95,7 +95,8 @@ const displayMoreInfo = () => {
         feelsLikeText.textContent = 'Feels Like'
 
         const feelsLikeTemp = document.createElement('h2')
-        feelsLikeTemp.textContent = `${data.current.feelslike_f}`
+        feelsLikeTemp.textContent = `${Math.round(data.current.feelslike_f)} ºF`
+        feelsLikeTemp.classList.add('feels-temp')
 
         content2.appendChild(feelsLikeText)
         content2.appendChild(feelsLikeTemp)

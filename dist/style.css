@@ -97,4 +97,15 @@ body::before {
     color: azure;
     top: 50px;
     margin-right: 45px;
+    font-weight: lighter;
+}
+
+.feels-temp {
+    margin-left: 25px;
+}
+
+#content2 > * {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 0;
 }

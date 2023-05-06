@@ -93,6 +93,7 @@ const displayMoreInfo = () => {
 
         const feelsLikeText = document.createElement('h3')
         feelsLikeText.textContent = 'Feels Like'
+        feelsLikeText.classList.add('feelslike-text')
 
         const feelsLikeTemp = document.createElement('h2')
         feelsLikeTemp.textContent = `${Math.round(data.current.feelslike_f)} ºF`
@@ -100,6 +101,7 @@ const displayMoreInfo = () => {
 
         const humidityText = document.createElement('h3')
         humidityText.textContent = 'Humidity'
+        humidityText.classList.add('humidity-text')
 
         const humidityPercent = document.createElement('h2')
         humidityPercent.textContent = `${data.current.humidity} %`
@@ -107,6 +109,7 @@ const displayMoreInfo = () => {
 
         const chanceRainText = document.createElement('h3')
         chanceRainText.textContent = 'Chance of Rain'
+        chanceRainText.classList.add('rain-text')
 
         const chanceRainPer = document.createElement('h2')
         chanceRainPer.textContent = `${data.forecast.forecastday[0].day.daily_chance_of_rain} %`

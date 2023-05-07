@@ -47,6 +47,7 @@ const displayMainWeather = (city) => {
         content.appendChild(currentDate)
         content.appendChild(temperature)
         content.appendChild(weatherImg)
+        content.appendChild(locationForm)
     })
 }  
 
@@ -78,8 +79,6 @@ locationButton.textContent = '';
 locationForm.appendChild(locationLabel);
 locationForm.appendChild(locationInput);
 locationForm.appendChild(locationButton);
-
-document.body.appendChild(locationForm);
 
 locationForm.addEventListener('submit', handleLocationFormSubmit);
 
@@ -174,3 +173,78 @@ const displayMoreInfo = () => {
 }
 displayMoreInfo()
 
+
+// async function sevenDayForecast() {
+//     try {
+//     const response = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${city}&days=7`)
+//     const data = await response.json()
+//     console.log(data)
+//     return data;
+//     } catch (error) {
+//         console.log(error)
+//     }
+// }
+
+// sevenDayForecast()
+
+// Set the API endpoint URL and parameters
+const apiUrl = "http://api.weatherapi.com/v1/forecast.json";
+const apiKey = "YOUR_API_KEY";
+const city = DEFAULT_CITY;
+const days = "7";
+
+// Build the API request URL
+const url = `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${city}&days=7`;
+
+// Fetch the weather data from the API and display the forecast
+const getForecast = async () => {
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    const forecastData = data.forecast.forecastday;
+
+    // Loop through the forecast data and create HTML elements for each day's weather
+    forecastData.forEach(item => {
+      const date = item.date;
+      const temp = item.day.avgtemp_f;
+      const icon = item.day.condition.icon;
+      const description = item.day.condition.text;
+
+      const forecastList = document.getElementById('content3')
+
+      // Create HTML elements for the forecast item
+      const itemDiv = document.createElement("div");
+      itemDiv.classList.add("forecast-item");
+
+      const dateDiv = document.createElement("div");
+      dateDiv.classList.add("forecast-date");
+      dateDiv.textContent = date;
+      itemDiv.appendChild(dateDiv);
+
+      const iconDiv = document.createElement("div");
+      iconDiv.classList.add("forecast-icon");
+      const iconImg = document.createElement("img");
+      iconImg.src = icon;
+      iconImg.alt = description;
+      iconDiv.appendChild(iconImg);
+      itemDiv.appendChild(iconDiv);
+
+      const tempDiv = document.createElement("div");
+      tempDiv.classList.add("forecast-temp");
+      tempDiv.textContent = temp + "°F";
+      itemDiv.appendChild(tempDiv);
+
+      const descDiv = document.createElement("div");
+      descDiv.classList.add("forecast-desc");
+      descDiv.textContent = description;
+      itemDiv.appendChild(descDiv);
+
+      // Add the forecast item to the forecast list
+      forecastList.appendChild(itemDiv);
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+getForecast();

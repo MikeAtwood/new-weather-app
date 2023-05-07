@@ -7,6 +7,9 @@ html, body {
   }
 
 body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
     background-image: url('/src/img/weather-img.jpeg');
     background-repeat: no-repeat;
     background-size: cover;
@@ -139,4 +142,20 @@ body::before {
   margin-top: 15px;
   margin-top: 10px;
   margin-bottom: 5px;
+}
+
+#content3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: auto;
+  color: azure;
+  margin-left: 60px;
+  margin-bottom: 90px;
+}
+
+.forecast-item {
+  width: calc(100% / 7 - 10px);
+  
 }

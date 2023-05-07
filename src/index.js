@@ -36,6 +36,7 @@ const displayMainWeather = (city) => {
         cityName.textContent = city
         currentDate.textContent = getCurrentDateTime()
         temperature.textContent = `${Math.round(data.current.temp_f)} ºF`
+        temperature.classList.add('temp')
         condition.classList.add('condition')
         cityName.classList.add('city')
         currentDate.classList.add('date')
@@ -149,10 +150,26 @@ const displayMoreInfo = () => {
         chanceRainSection.appendChild(chanceInfo)
 
         // Wind Speed Section
+        const windSection = document.createElement('div')
+        windSection.classList.add('wind-section')
+        const windIcon = document.createElement('img')
+        windIcon.src = '../src/img/wind-icon.png'
+        windIcon.alt = 'Wind Speed Icon'
+        const windInfo = document.createElement('div')
+        const windText = document.createElement('h3')
+        windText.textContent = 'Wind Speed'
+        const windMph = document.createElement('h2')
+        windMph.textContent = `${data.current.wind_mph} mph`
+
+        windInfo.appendChild(windText)
+        windInfo.appendChild(windMph)
+        windSection.appendChild(windIcon)
+        windSection.appendChild(windInfo)
 
         content2.appendChild(feelsLikeSection)
         content2.appendChild(humiditySection)
         content2.appendChild(chanceRainSection)
+        content2.appendChild(windSection)
     })
 }
 displayMoreInfo()

@@ -59,14 +59,16 @@ body::before {
     border: none;
     color: black;
     cursor: pointer;
-    padding: 5px;
+    padding: 15px 15px;
+    background-image: url('../src//img/search.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 30px 30px;
   }
 
-  #location-form button::before {
-    content: "\1F50D";
-    display: inline-block;
-    font-size: 16px;
-    margin-right: 5px;
+  .temp {
+    font-size: 50px;
+    margin-left: 10px;
   }
 
   img {
@@ -80,12 +82,12 @@ body::before {
   }
 
 .city {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: lighter;
 }
 
 .date {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: lighter;
 }
 
@@ -102,6 +104,7 @@ body::before {
     top: 50px;
     margin-right: 45px;
     font-weight: lighter;
+    font-size: 14px;
 }
 
 #content2 > * {
@@ -110,38 +113,30 @@ body::before {
     padding: 0;
 }
 
-.feelslike-text,
-.humidity-text,
-.rain-text {
+#content2 img {
+  width: 40px;
+  height: 40px;
+  margin-top: 3px;
+  margin-right: 5px;
+}
+
+#content2 h2 {
   font-size: 18px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
-.feels-like-section img {
-  width: 70px;
-  height: 70px;
-  margin-top: 10px;
-}
-
-.feels-like-section {
+.feels-like-section,
+.chance-section,
+.humidity-section,
+.wind-section {
   display: flex;
 }
 
-.humidity-section img {
-  width: 70px;
-  height: 70px;
-  margin-top: 10px;
-}
-
-.humidity-section {
+#content2 h3 {
   display: flex;
-}
-
-.chance-section img {
-  width: 70px;
-  height: 70px;
+  font-size: 12px;
+  margin-top: 15px;
   margin-top: 10px;
-}
-
-.chance-section {
-  display: flex;
+  margin-bottom: 5px;
 }

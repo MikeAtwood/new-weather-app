@@ -174,26 +174,8 @@ const displayMoreInfo = () => {
 displayMoreInfo()
 
 
-// async function sevenDayForecast() {
-//     try {
-//     const response = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${city}&days=7`)
-//     const data = await response.json()
-//     console.log(data)
-//     return data;
-//     } catch (error) {
-//         console.log(error)
-//     }
-// }
-
-// sevenDayForecast()
-
 // Set the API endpoint URL and parameters
-const apiUrl = "http://api.weatherapi.com/v1/forecast.json";
-const apiKey = "YOUR_API_KEY";
 const city = DEFAULT_CITY;
-const days = "7";
-
-// Build the API request URL
 const url = `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${city}&days=7`;
 
 // Fetch the weather data from the API and display the forecast

@@ -90,37 +90,70 @@ const displayMoreInfo = () => {
         console.log(data.current.feelslike_f)
 
         const content2 = document.getElementById('content2')
-
+        
+        // Feels like section
+        const feelsLikeSection = document.createElement('div')
+        feelsLikeSection.classList.add('feels-like-section')
+        const feelsLikeIcon = document.createElement('img')
+        feelsLikeIcon.src = '../src/img/feelslike.png'
+        feelsLikeIcon.alt = 'Feels Like Icon'
+        const feelsInfo = document.createElement('div')
         const feelsLikeText = document.createElement('h3')
         feelsLikeText.textContent = 'Feels Like'
         feelsLikeText.classList.add('feelslike-text')
-
         const feelsLikeTemp = document.createElement('h2')
         feelsLikeTemp.textContent = `${Math.round(data.current.feelslike_f)} ºF`
         feelsLikeTemp.classList.add('feels-temp')
 
+        feelsLikeSection.appendChild(feelsLikeIcon)
+        feelsInfo.appendChild(feelsLikeText)
+        feelsInfo.appendChild(feelsLikeTemp)
+        feelsLikeSection.appendChild(feelsInfo)
+
+        // Humidity section
+        const humiditySection = document.createElement('div')
+        humiditySection.classList.add('humidity-section')
+        const humidityIcon = document.createElement('img')
+        humidityIcon.src = '../src/img/humidity-icon.png'
+        humidityIcon.alt = 'Humidity Icon'
+        const humidityInfo = document.createElement('div')
         const humidityText = document.createElement('h3')
         humidityText.textContent = 'Humidity'
         humidityText.classList.add('humidity-text')
-
         const humidityPercent = document.createElement('h2')
         humidityPercent.textContent = `${data.current.humidity} %`
         humidityPercent.classList.add('humidity-per')
 
+        humidityInfo.appendChild(humidityText)
+        humidityInfo.appendChild(humidityPercent)
+        humiditySection.appendChild(humidityIcon)
+        humiditySection.appendChild(humidityInfo)
+
+        // Chance of Rain section
+        const chanceRainSection = document.createElement('div')
+        chanceRainSection.classList.add('chance-section')
+        const chanceRainIcon = document.createElement('img')
+        chanceRainIcon.src = '../src/img/chance-rain.png'
+        chanceRainIcon.alt = 'Chance Of Rain Icon'
+        const chanceInfo = document.createElement('div')
         const chanceRainText = document.createElement('h3')
         chanceRainText.textContent = 'Chance of Rain'
         chanceRainText.classList.add('rain-text')
-
         const chanceRainPer = document.createElement('h2')
         chanceRainPer.textContent = `${data.forecast.forecastday[0].day.daily_chance_of_rain} %`
         chanceRainPer.classList.add('rain-per')
 
-        content2.appendChild(feelsLikeText)
-        content2.appendChild(feelsLikeTemp)
-        content2.appendChild(humidityText)
-        content2.appendChild(humidityPercent)
-        content2.appendChild(chanceRainText)
-        content2.appendChild(chanceRainPer)
+        chanceInfo.appendChild(chanceRainText)
+        chanceInfo.appendChild(chanceRainPer)
+        chanceRainSection.appendChild(chanceRainIcon)
+        chanceRainSection.appendChild(chanceInfo)
+
+        // Wind Speed Section
+
+        content2.appendChild(feelsLikeSection)
+        content2.appendChild(humiditySection)
+        content2.appendChild(chanceRainSection)
     })
 }
 displayMoreInfo()
+

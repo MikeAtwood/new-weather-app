@@ -104,7 +104,7 @@ const displayMoreInfo = () => {
     const feelsLikeSection = document.createElement('div')
     feelsLikeSection.classList.add('feels-like-section')
     const feelsLikeIcon = document.createElement('img')
-    feelsLikeIcon.src = '../src/img/feelslike.png'
+    feelsLikeIcon.src = 'img/feelslike.png'
     feelsLikeIcon.alt = 'Feels Like Icon'
     const feelsInfo = document.createElement('div')
     const feelsLikeText = document.createElement('h3')
@@ -123,7 +123,7 @@ const displayMoreInfo = () => {
     const humiditySection = document.createElement('div')
     humiditySection.classList.add('humidity-section')
     const humidityIcon = document.createElement('img')
-    humidityIcon.src = '../src/img/humidity-icon.png'
+    humidityIcon.src = 'img/humidity-icon.png'
     humidityIcon.alt = 'Humidity Icon'
     const humidityInfo = document.createElement('div')
     const humidityText = document.createElement('h3')

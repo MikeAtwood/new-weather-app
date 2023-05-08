@@ -10,7 +10,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background-image: url('../img/weather-img.jpeg');
+    background-image: url('img/weather-img.jpeg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -63,7 +63,7 @@ body::before {
     color: black;
     cursor: pointer;
     padding: 15px 15px;
-    background-image: url('../src//img/search.png');
+    background-image: url('img/search.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: 30px 30px;

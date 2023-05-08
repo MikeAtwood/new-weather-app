@@ -142,7 +142,7 @@ const displayMoreInfo = () => {
     const chanceRainSection = document.createElement('div')
     chanceRainSection.classList.add('chance-section')
     const chanceRainIcon = document.createElement('img')
-    chanceRainIcon.src = '../src/img/chance-rain.png'
+    chanceRainIcon.src = 'img/chance-rain.png'
     chanceRainIcon.alt = 'Chance Of Rain Icon'
     const chanceInfo = document.createElement('div')
     const chanceRainText = document.createElement('h3')
@@ -161,7 +161,7 @@ const displayMoreInfo = () => {
     const windSection = document.createElement('div')
     windSection.classList.add('wind-section')
     const windIcon = document.createElement('img')
-    windIcon.src = '../src/img/wind-icon.png'
+    windIcon.src = 'img/wind-icon.png'
     windIcon.alt = 'Wind Speed Icon'
     const windInfo = document.createElement('div')
     const windText = document.createElement('h3')

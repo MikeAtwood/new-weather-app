@@ -176,7 +176,7 @@ displayMoreInfo()
 
 // Set the API endpoint URL and parameters
 const city = DEFAULT_CITY;
-const url = `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${city}&days=7`;
+const url = `https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${city}&days=7`;
 
 // Fetch the weather data from the API and display the forecast
 const getForecast = async () => {

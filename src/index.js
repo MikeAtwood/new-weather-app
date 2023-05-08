@@ -3,7 +3,7 @@ import cors from 'cors'
 
 const API_KEY = "37c5032acb2b4e67a9f215631230205"
 let DEFAULT_CITY = "Minnetonka"
-let API_URL = (`https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${DEFAULT_CITY}`, { mode: cors })
+let API_URL = (`https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${DEFAULT_CITY}`, { mode: cors, })
 
 async function fetchWeatherData(city) {
     try {
@@ -12,7 +12,7 @@ async function fetchWeatherData(city) {
         console.log(data)
         return data;
     } catch (error) {
-        console.error(error)
+        console.error(error, "error")
     }
 }
 

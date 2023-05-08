@@ -1,12 +1,13 @@
 import moment from 'moment'
+import cors from 'cors'
 
 const API_KEY = "37c5032acb2b4e67a9f215631230205"
 let DEFAULT_CITY = "Minnetonka"
-let API_URL = `https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${DEFAULT_CITY}`
+let API_URL = (`https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${DEFAULT_CITY}`, { mode: cors })
 
 async function fetchWeatherData(city) {
     try {
-        const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${city}`)
+        const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${city}`, { mode: cors })
         const data = await response.json()
         console.log(data)
         return data;
@@ -176,7 +177,7 @@ displayMoreInfo()
 
 // Set the API endpoint URL and parameters
 const city = DEFAULT_CITY;
-const url = `https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${city}&days=7`;
+const url = (`https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${city}&days=7`, { mode: cors });
 
 // Fetch the weather data from the API and display the forecast
 const getForecast = async () => {

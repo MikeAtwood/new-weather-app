@@ -185,15 +185,15 @@ displayMoreInfo()
 
 // Set the API endpoint URL and parameters
 const city = DEFAULT_CITY;
-const url = (`https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${city}&days=7`, {
-  method: 'GET',
-  mode: 'cors'
-});
+const url = `https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${city}&days=7`
 
 // Fetch the weather data from the API and display the forecast
 const getForecast = async () => {
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+  method: 'GET',
+  mode: 'cors'
+});
     const data = await response.json();
     const forecastData = data.forecast.forecastday;
 

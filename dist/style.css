@@ -10,7 +10,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background-image: url('../img/weather-img.jpeg');
+    background-image: url('../src/img/weather-img.jpeg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;

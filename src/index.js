@@ -1,5 +1,4 @@
 import moment from 'moment'
-import cors from 'cors'
 
 const API_KEY = "37c5032acb2b4e67a9f215631230205"
 let DEFAULT_CITY = "Minnetonka"
@@ -14,11 +13,14 @@ async function fetchWeatherData(city) {
       method: 'GET',
       mode: 'cors'
     })
-    const data = await response.json()
-    console.log(data)
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const data = await response.json();
+    console.log(data);
     return data;
-  } catch (error) {
-    console.error(error, "error")
+  } catch(error) {
+    console.log(error);
   }
 }
 
@@ -93,7 +95,7 @@ displayMainWeather(DEFAULT_CITY);
 
 // Fetch extra current info
 const displayMoreInfo = () => {
-  fetchWeatherData(API_URL).then(data => {
+  fetchWeatherData(DEFAULT_CITY).then(data => {
     console.log(data.current.feelslike_f)
 
     const content2 = document.getElementById('content2')
@@ -235,8 +237,9 @@ const getForecast = async () => {
       forecastList.appendChild(itemDiv);
     });
   } catch (error) {
-    console.error(error);
+    console.log(error);
   }
 };
 
 getForecast();
+

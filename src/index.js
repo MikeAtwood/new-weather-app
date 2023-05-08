@@ -242,4 +242,3 @@ const getForecast = async () => {
 };
 
 getForecast();
-

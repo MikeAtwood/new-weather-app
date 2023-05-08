@@ -9,7 +9,7 @@ let API_URL = (`https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${D
 
 async function fetchWeatherData(city) {
   try {
-    const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${city}`, {
+    const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${DEFAULT_CITY}`, {
       method: 'GET',
       mode: 'cors'
     })
@@ -67,6 +67,7 @@ function handleLocationFormSubmit(event) {
   const newCity = locationInput.value;
   DEFAULT_CITY = newCity;
   displayMainWeather(DEFAULT_CITY);
+  displayMoreInfo(newCity)
   locationInput.value = '';
 }
 
@@ -93,94 +94,116 @@ locationForm.addEventListener('submit', handleLocationFormSubmit);
 
 displayMainWeather(DEFAULT_CITY);
 
+// Create the elements for displayMoreInfo()
+const createMoreInfoElements = () => {
+  const content2 = document.createElement('div')
+// Feels like section
+  const feelsLikeSection = document.createElement('div')
+  const feelsLikeIcon = document.createElement('img')
+  const feelsInfo = document.createElement('div')
+  const feelsLikeText = document.createElement('h3')
+  const feelsLikeTemp = document.createElement('h2')
+// Humidity section
+  const humiditySection = document.createElement('div')
+  const humidityIcon = document.createElement('img')
+  const humidityInfo = document.createElement('div')
+  const humidityText = document.createElement('h3')
+  const humidityPercent = document.createElement('h2')
+// Chance of Rain section
+  const chanceRainSection = document.createElement('div')
+  const chanceRainIcon = document.createElement('img')
+  const chanceInfo = document.createElement('div')
+  const chanceRainText = document.createElement('h3')
+  const chanceRainPer = document.createElement('h2')
+// Wind Speed section
+  const windSection = document.createElement('div')
+  const windTitle = document.createElement('h2')
+  const windIcon = document.createElement('img')
+  const windInfo = document.createElement('div')
+  const windText = document.createElement('h3')
+  const windMph = document.createElement('h2')
+
+  content2.classList.add('content2')
+  feelsLikeSection.classList.add('feels-like-section')
+  feelsLikeText.classList.add('feelslike-text')
+  feelsLikeTemp.classList.add('feels-temp')
+  humiditySection.classList.add('humidity-section')
+  humidityText.classList.add('humidity-text')
+  humidityPercent.classList.add('humidity-per')
+  chanceRainSection.classList.add('chance-section')
+  chanceRainText.classList.add('rain-text')
+  chanceRainPer.classList.add('rain-per')
+  windSection.classList.add('wind-section')
+
+  feelsLikeIcon.src = 'img/feelslike.png'
+  feelsLikeIcon.alt = 'Feels Like Icon'
+  feelsLikeText.textContent = 'Feels Like'
+  feelsLikeTemp.textContent = ''
+  humidityIcon.src = 'img/humidity-icon.png'
+  humidityIcon.alt = 'Humidity Icon'
+  humidityText.textContent = 'Humidity'
+  humidityPercent.textContent = ''
+  chanceRainIcon.src = 'img/chance-rain.png'
+  chanceRainIcon.alt = 'Chance Of Rain Icon'
+  chanceRainText.textContent = 'Chance of Rain'
+  chanceRainPer.textContent = ''
+  windIcon.src = 'img/wind-icon.png'
+  windIcon.alt = 'Wind Speed Icon'
+  windText.textContent = 'Wind Speed'
+  windMph.textContent = ''
+ 
+
+
+    
+  feelsLikeSection.appendChild(feelsLikeIcon)
+  feelsInfo.appendChild(feelsLikeText)
+  feelsInfo.appendChild(feelsLikeTemp)
+  feelsLikeSection.appendChild(feelsInfo)
+  humidityInfo.appendChild(humidityText)
+  humidityInfo.appendChild(humidityPercent)
+  humiditySection.appendChild(humidityIcon)
+  humiditySection.appendChild(humidityInfo)
+  chanceInfo.appendChild(chanceRainText)
+  chanceInfo.appendChild(chanceRainPer)
+  chanceRainSection.appendChild(chanceRainIcon)
+  chanceRainSection.appendChild(chanceInfo)
+  windInfo.appendChild(windText)
+  windInfo.appendChild(windMph)
+  windSection.appendChild(windIcon)
+  windSection.appendChild(windInfo)
+
+  content2.appendChild(feelsLikeSection)
+  content2.appendChild(humiditySection)
+  content2.appendChild(chanceRainSection)
+  content2.appendChild(windSection)
+
+  return content2
+}
+
 // Fetch extra current info
-const displayMoreInfo = () => {
-  fetchWeatherData(DEFAULT_CITY).then(data => {
-    console.log(data.current.feelslike_f)
+const displayMoreInfo = (city) => {
+  fetchWeatherData(city).then(data => {
+    console.log(data)
+    let content2 = document.querySelector('.content2')
+    if (!content2) {
+      content2 = createMoreInfoElements()
+      const content = document.getElementById('content')
+      content.appendChild(content2)
+    }
 
-    const content2 = document.getElementById('content2')
+    const feelsLikeTemp = content2.querySelector('.feels-temp')
+    const humidityPercent = content2.querySelector('.humidity-per')
+    const chanceRainPer = content2.querySelector('.rain-per')
+    const windMph = content2.querySelector('.wind-section')
 
-    // Feels like section
-    const feelsLikeSection = document.createElement('div')
-    feelsLikeSection.classList.add('feels-like-section')
-    const feelsLikeIcon = document.createElement('img')
-    feelsLikeIcon.src = 'img/feelslike.png'
-    feelsLikeIcon.alt = 'Feels Like Icon'
-    const feelsInfo = document.createElement('div')
-    const feelsLikeText = document.createElement('h3')
-    feelsLikeText.textContent = 'Feels Like'
-    feelsLikeText.classList.add('feelslike-text')
-    const feelsLikeTemp = document.createElement('h2')
     feelsLikeTemp.textContent = `${Math.round(data.current.feelslike_f)} ºF`
-    feelsLikeTemp.classList.add('feels-temp')
-
-    feelsLikeSection.appendChild(feelsLikeIcon)
-    feelsInfo.appendChild(feelsLikeText)
-    feelsInfo.appendChild(feelsLikeTemp)
-    feelsLikeSection.appendChild(feelsInfo)
-
-    // Humidity section
-    const humiditySection = document.createElement('div')
-    humiditySection.classList.add('humidity-section')
-    const humidityIcon = document.createElement('img')
-    humidityIcon.src = 'img/humidity-icon.png'
-    humidityIcon.alt = 'Humidity Icon'
-    const humidityInfo = document.createElement('div')
-    const humidityText = document.createElement('h3')
-    humidityText.textContent = 'Humidity'
-    humidityText.classList.add('humidity-text')
-    const humidityPercent = document.createElement('h2')
     humidityPercent.textContent = `${data.current.humidity} %`
-    humidityPercent.classList.add('humidity-per')
-
-    humidityInfo.appendChild(humidityText)
-    humidityInfo.appendChild(humidityPercent)
-    humiditySection.appendChild(humidityIcon)
-    humiditySection.appendChild(humidityInfo)
-
-    // Chance of Rain section
-    const chanceRainSection = document.createElement('div')
-    chanceRainSection.classList.add('chance-section')
-    const chanceRainIcon = document.createElement('img')
-    chanceRainIcon.src = 'img/chance-rain.png'
-    chanceRainIcon.alt = 'Chance Of Rain Icon'
-    const chanceInfo = document.createElement('div')
-    const chanceRainText = document.createElement('h3')
-    chanceRainText.textContent = 'Chance of Rain'
-    chanceRainText.classList.add('rain-text')
-    const chanceRainPer = document.createElement('h2')
     chanceRainPer.textContent = `${data.forecast.forecastday[0].day.daily_chance_of_rain} %`
-    chanceRainPer.classList.add('rain-per')
-
-    chanceInfo.appendChild(chanceRainText)
-    chanceInfo.appendChild(chanceRainPer)
-    chanceRainSection.appendChild(chanceRainIcon)
-    chanceRainSection.appendChild(chanceInfo)
-
-    // Wind Speed Section
-    const windSection = document.createElement('div')
-    windSection.classList.add('wind-section')
-    const windIcon = document.createElement('img')
-    windIcon.src = 'img/wind-icon.png'
-    windIcon.alt = 'Wind Speed Icon'
-    const windInfo = document.createElement('div')
-    const windText = document.createElement('h3')
-    windText.textContent = 'Wind Speed'
-    const windMph = document.createElement('h2')
     windMph.textContent = `${data.current.wind_mph} mph`
-
-    windInfo.appendChild(windText)
-    windInfo.appendChild(windMph)
-    windSection.appendChild(windIcon)
-    windSection.appendChild(windInfo)
-
-    content2.appendChild(feelsLikeSection)
-    content2.appendChild(humiditySection)
-    content2.appendChild(chanceRainSection)
-    content2.appendChild(windSection)
-  })
+  });
 }
 displayMoreInfo()
+
 
 
 // Set the API endpoint URL and parameters

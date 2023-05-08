@@ -200,7 +200,7 @@ const getForecast = async () => {
 
       const dateDiv = document.createElement("div");
       dateDiv.classList.add("forecast-date");
-      dateDiv.textContent = date;
+      dateDiv.textContent = moment(date).format('dddd');
       itemDiv.appendChild(dateDiv);
 
       const iconDiv = document.createElement("div");
@@ -213,7 +213,7 @@ const getForecast = async () => {
 
       const tempDiv = document.createElement("div");
       tempDiv.classList.add("forecast-temp");
-      tempDiv.textContent = temp + "°F";
+      tempDiv.textContent = `${Math.round(temp)}°F`;
       itemDiv.appendChild(tempDiv);
 
       const descDiv = document.createElement("div");

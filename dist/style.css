@@ -151,10 +151,14 @@ body::before {
   flex-wrap: wrap;
   margin-top: auto;
   color: azure;
-  margin-left: 70px;
   margin-bottom: 90px;
 }
 
 .forecast-item {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: calc(100% / 7 - 1px);
+  font-size: 18px;
 }

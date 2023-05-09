@@ -19,7 +19,7 @@ async function fetchWeatherData(city) {
     const data = await response.json();
     console.log(data);
     return data;
-  } catch(error) {
+  } catch (error) {
     console.log(error);
   }
 }
@@ -68,6 +68,7 @@ function handleLocationFormSubmit(event) {
   DEFAULT_CITY = newCity;
   displayMainWeather(DEFAULT_CITY);
   displayMoreInfo(DEFAULT_CITY)
+  getForecast(DEFAULT_CITY)
   locationInput.value = '';
 }
 
@@ -189,7 +190,7 @@ const createMoreInfoElements = () => {
     windSection.classList.add('wind-section')
     windText.classList.add('wind-text')
     windMph.classList.add('wind-mph')
-    
+
     windIcon.src = 'img/wind-icon.png'
     windIcon.alt = 'Wind Speed Icon'
     windText.textContent = 'Wind Speed'
@@ -208,7 +209,7 @@ const createMoreInfoElements = () => {
 // Fetch extra current info
 const displayMoreInfo = (city) => {
   fetchWeatherData(city).then(data => {
-    console.log('3',data)
+    console.log('3', data)
     const [feelsLikeTemp, humidityPercent, chanceRainPer, windMph] = createMoreInfoElements()
 
     console.log(feelsLikeTemp, humidityPercent, chanceRainPer, windMph)
@@ -223,62 +224,95 @@ displayMoreInfo()
 
 
 
-// Set the API endpoint URL and parameters
-const city = DEFAULT_CITY;
-const url = `https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${city}&days=7`
+
 
 // Fetch the weather data from the API and display the forecast
-const getForecast = async () => {
+const fetchForecastData = async (city) => {
+  const url = `https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${city}&days=7`
   try {
     const response = await fetch(url, {
-  method: 'GET',
-  mode: 'cors'
-});
-    const data = await response.json();
-    const forecastData = data.forecast.forecastday;
-
-    // Loop through the forecast data and create HTML elements for each day's weather
-    forecastData.forEach(item => {
-      const date = item.date;
-      const temp = item.day.avgtemp_f;
-      const icon = item.day.condition.icon;
-      const description = item.day.condition.text;
-
-      const forecastList = document.getElementById('content3')
-
-      // Create HTML elements for the forecast item
-      const itemDiv = document.createElement("div");
-      itemDiv.classList.add("forecast-item");
-
-      const dateDiv = document.createElement("div");
-      dateDiv.classList.add("forecast-date");
-      dateDiv.textContent = moment(date).format('dddd');
-      itemDiv.appendChild(dateDiv);
-
-      const iconDiv = document.createElement("div");
-      iconDiv.classList.add("forecast-icon");
-      const iconImg = document.createElement("img");
-      iconImg.src = icon;
-      iconImg.alt = description;
-      iconDiv.appendChild(iconImg);
-      itemDiv.appendChild(iconDiv);
-
-      const tempDiv = document.createElement("div");
-      tempDiv.classList.add("forecast-temp");
-      tempDiv.textContent = `${Math.round(temp)}°F`;
-      itemDiv.appendChild(tempDiv);
-
-      const descDiv = document.createElement("div");
-      descDiv.classList.add("forecast-desc");
-      descDiv.textContent = description;
-      itemDiv.appendChild(descDiv);
-
-      // Add the forecast item to the forecast list
-      forecastList.appendChild(itemDiv);
+      method: 'GET',
+      mode: 'cors'
     });
+    const data = await response.json();
+    if (data.error) {
+      throw new Error(data.error.message)
+    } 
+    return data.forecast.forecastday;
   } catch (error) {
     console.log(error);
   }
 };
+
+// Loop through the forecast data and create HTML elements for each day's weather
+const createForecastElements = (forecastData) => {
+  const forecastElements = []
+  const content3 = document.getElementById('content3')
+  content3.textContent = ''
+
+  forecastData.forEach(item => {
+    const date = item.date;
+    const temp = item.day.avgtemp_f;
+    const icon = item.day.condition.icon;
+    const description = item.day.condition.text;
+
+    
+
+    // Create HTML elements for the forecast item
+    const itemDiv = document.createElement("div");
+    itemDiv.classList.add("forecast-item");
+
+    const dateDiv = document.createElement("div");
+    dateDiv.classList.add("forecast-date");
+    dateDiv.textContent = moment(date).format('dddd');
+    itemDiv.appendChild(dateDiv);
+
+    const iconDiv = document.createElement("div");
+    iconDiv.classList.add("forecast-icon");
+    const iconImg = document.createElement("img");
+    iconImg.src = icon;
+    iconImg.alt = description;
+    iconDiv.appendChild(iconImg);
+    itemDiv.appendChild(iconDiv);
+
+    const tempDiv = document.createElement("div");
+    tempDiv.classList.add("forecast-temp");
+    tempDiv.textContent = `${Math.round(temp)}°F`;
+    itemDiv.appendChild(tempDiv);
+
+    const descDiv = document.createElement("div");
+    descDiv.classList.add("forecast-desc");
+    descDiv.textContent = description;
+    itemDiv.appendChild(descDiv);
+
+    // Add the forecast item to the forecast list
+    content3.appendChild(itemDiv);
+
+    forecastElements.push(itemDiv)
+});
+  return forecastElements
+}
+
+const updateForecastElements = (forecastData, forecastDays, forecastIcons, forecastTemps) => {
+  for (let i = 0; i < forecastDays.length; i++) {
+    forecastDays[i].textContent = getDayOfWeek(forecastData[i+1].date);
+    forecastIcons[i].src = `https:${forecastData[i+1].day.condition.icon}`;
+    forecastIcons[i].alt = forecastData[i+1].day.condition.text;
+    forecastTemps[i].textContent = `${Math.round(forecastData[i+1].day.avgtemp_f)} ºF`;
+    console.log('right here', getDayOfWeek(forecastData[i+1].date))
+  }
+}
+
+const getForecast = async () => {
+  try {
+    const city = DEFAULT_CITY
+    const forecastData = await fetchForecastData(city)
+    const [forecastDays, forecastIcons, forecastTemps] = createForecastElements(forecastData)
+    updateForecastElements(forecastData, forecastDays, forecastIcons, forecastTemps)
+    console.log(forecastData, forecastDays, forecastIcons, forecastTemps)
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 getForecast();
